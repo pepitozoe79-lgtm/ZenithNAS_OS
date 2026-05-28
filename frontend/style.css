@@ -1672,3 +1672,457 @@ body, html {
 .hidden {
   display: none !important;
 }
+
+/* =====================================================================
+   ESTILOS HÍBRIDOS ESTILO CASAOS - DASHBOARD CENTRAL Y APPS GRID
+   ===================================================================== */
+
+/* Ajuste general del área del escritorio */
+#desktop-area {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
+  padding: 16px 8px 16px 16px;
+  width: 100%;
+  height: calc(100% - 48px);
+}
+
+/* Columna Lateral Izquierda (DSM Shortcuts) */
+#desktop-sidebar-shortcuts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 80px;
+  height: 100%;
+  padding-top: 10px;
+  z-index: 10;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+#desktop-sidebar-shortcuts .desktop-shortcut {
+  width: 68px;
+  height: 72px;
+  padding: 6px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--transition-smooth);
+}
+
+#desktop-sidebar-shortcuts .desktop-shortcut:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+#desktop-sidebar-shortcuts .shortcut-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  margin-bottom: 4px;
+}
+
+#desktop-sidebar-shortcuts .shortcut-label {
+  font-size: 10px;
+  max-width: 64px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+/* Dashboard Central (CasaOS Dashboard) */
+#casa-dashboard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 24px 24px 24px;
+  margin-right: 320px; /* Deja espacio para widgets de la derecha por defecto */
+  overflow-y: auto;
+  z-index: 5;
+  scrollbar-width: none; /* Ocultar scrollbar Firefox */
+  transition: margin-right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#casa-dashboard::-webkit-scrollbar {
+  display: none; /* Ocultar scrollbar Chrome/Safari */
+}
+
+/* 1. Cabecera de Bienvenida del Dashboard */
+.casa-dashboard-welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 16px;
+}
+
+#casa-welcome-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 4px;
+}
+
+#casa-welcome-subtitle {
+  font-size: 12px;
+  color: var(--syno-text-muted);
+}
+
+.casa-search-container {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  border: var(--border-glass);
+  border-radius: 30px;
+  padding: 6px 14px;
+  width: 280px;
+  transition: var(--transition-smooth);
+}
+
+.casa-search-container:focus-within {
+  border-color: var(--syno-blue);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 12px var(--syno-blue-glow);
+}
+
+.casa-search-container .search-icon {
+  color: var(--syno-text-muted);
+  margin-right: 8px;
+}
+
+.casa-search-container input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 12px;
+  width: 100%;
+}
+
+.casa-search-container input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* 2. Widgets de Anillos de Progreso Circulares */
+.casa-status-widget {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.casa-status-card {
+  background: var(--bg-glass-medium);
+  border: var(--border-glass);
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.casa-status-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.status-circle-container {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  margin-bottom: 8px;
+}
+
+.status-ring-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ring-bg {
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 8px;
+}
+
+.ring-bar {
+  stroke-width: 8px;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.ring-cpu {
+  stroke: url(#cpuGrad);
+}
+
+.ring-ram {
+  stroke: url(#ramGrad);
+}
+
+.ring-storage {
+  stroke: url(#storageGrad);
+}
+
+.status-circle-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.1;
+}
+
+.status-value {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
+
+.status-label {
+  font-size: 8px;
+  color: var(--syno-text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 1px;
+}
+
+.status-meta {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--syno-text-muted);
+  margin-top: 4px;
+}
+
+/* 3. Sección de Apps Grid estilo CasaOS Dashboard */
+.casa-apps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+
+.casa-apps-header h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.casa-btn-link {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition-smooth);
+}
+
+.casa-btn-link:hover {
+  background: var(--syno-blue);
+  border-color: var(--syno-blue);
+  box-shadow: 0 4px 10px var(--syno-blue-glow);
+}
+
+#casa-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  padding-bottom: 24px;
+}
+
+/* 4. Tarjetas de Aplicación CasaOS App Card */
+.casa-app-card {
+  background: var(--bg-glass-heavy);
+  border: var(--border-glass);
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  height: 72px;
+}
+
+.casa-app-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: var(--shadow-intuitiva);
+}
+
+.casa-app-card.stopped {
+  opacity: 0.65;
+}
+
+.casa-app-icon-container {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Indicador LED de Estado */
+.casa-app-status-dot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--bg-glass-heavy);
+  background: #9ca3af; /* Apagado */
+}
+
+.casa-app-status-dot.active {
+  background: var(--syno-green); /* Encendido */
+  box-shadow: 0 0 8px var(--syno-green-glow);
+  animation: pulseLed 2s infinite;
+}
+
+@keyframes pulseLed {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 12px var(--syno-green-glow); }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+.casa-app-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.casa-app-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.casa-app-port {
+  font-size: 10px;
+  color: var(--syno-text-muted);
+}
+
+/* Control flotante rápido */
+.casa-app-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(18, 22, 33, 0.92);
+  padding: 4px;
+  border-radius: 20px;
+  border: var(--border-glass);
+}
+
+.casa-app-card:hover .casa-app-actions {
+  opacity: 1;
+}
+
+.casa-action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--syno-text-muted);
+  transition: var(--transition-smooth);
+}
+
+.casa-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.casa-action-btn.btn-play:hover {
+  color: var(--syno-green);
+  background: var(--syno-green-glow);
+}
+
+.casa-action-btn.btn-stop:hover {
+  color: var(--syno-red);
+  background: rgba(231, 76, 60, 0.15);
+}
+
+.casa-action-btn.btn-open:hover {
+  color: var(--syno-blue);
+  background: var(--syno-blue-glow);
+}
+
+/* Empty State */
+.casa-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 32px 16px;
+  background: var(--bg-glass-light);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  color: var(--syno-text-muted);
+  font-size: 12px;
+}
+
+/* Adaptación responsive */
+@media (max-width: 900px) {
+  #desktop-area {
+    padding: 8px;
+  }
+  #desktop-sidebar-shortcuts {
+    width: 68px;
+    gap: 12px;
+  }
+  #desktop-sidebar-shortcuts .desktop-shortcut {
+    width: 56px;
+    height: 56px;
+  }
+  #casa-dashboard {
+    padding: 12px;
+    margin-right: 0 !important;
+  }
+}

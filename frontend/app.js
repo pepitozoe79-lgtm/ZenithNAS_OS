@@ -21,6 +21,7 @@ class DesktopManager {
     this.startStatsPolling();
     this.startUSBDetectionPolling();
     this.fetchStaticSystemInfo();
+    this.updateCasaDashboard();
   }
 
   // 1. Reloj del Sistema
@@ -92,20 +93,45 @@ class DesktopManager {
     // Mostrar/Ocultar Widgets
     const btnWidgets = document.getElementById('btn-widgets-toggle');
     const widgetsArea = document.getElementById('desktop-widgets');
-    const desktopIcons = document.getElementById('desktop-icons');
+    const casaDashboard = document.getElementById('casa-dashboard');
 
     btnWidgets.addEventListener('click', () => {
       this.widgetsVisible = !this.widgetsVisible;
       if (this.widgetsVisible) {
         widgetsArea.style.transform = 'translateX(0)';
-        desktopIcons.style.width = 'calc(100% - 320px)';
+        if (casaDashboard) casaDashboard.style.marginRight = '320px';
         btnWidgets.classList.add('active');
       } else {
         widgetsArea.style.transform = 'translateX(320px)';
-        desktopIcons.style.width = '100%';
+        if (casaDashboard) casaDashboard.style.marginRight = '0';
         btnWidgets.classList.remove('active');
       }
     });
+
+    // Vincular botón "Instalar Apps" de CasaOS para abrir Package Center
+    const btnGoPackage = document.getElementById('casa-btn-go-package-center');
+    if (btnGoPackage) {
+      btnGoPackage.addEventListener('click', () => {
+        this.openApp('package-center');
+      });
+    }
+
+    // Vincular búsqueda rápida de CasaOS en el escritorio
+    const casaSearchInput = document.getElementById('casa-search-input');
+    if (casaSearchInput) {
+      casaSearchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.casa-app-card');
+        cards.forEach(card => {
+          const name = card.querySelector('.casa-app-name').textContent.toLowerCase();
+          if (name.includes(query)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
 
     // Barra de Notificaciones
     const btnNotif = document.getElementById('btn-notifications');
@@ -861,6 +887,29 @@ class DesktopManager {
         document.getElementById('speed-rx').textContent = `${sysData.network.rx} KB/s`;
         document.getElementById('speed-tx').textContent = `${sysData.network.tx} KB/s`;
 
+        // ==========================================
+        // ACTUALIZAR ANILLOS CIRCULARES CASAOS (DASHBOARD)
+        // ==========================================
+        // 1. CPU Ring (Circunferencia = 251.2)
+        const cpuPercent = sysData.cpu.usage;
+        const cpuOffset = 251.2 - (cpuPercent / 100) * 251.2;
+        const ringCpu = document.getElementById('casa-ring-cpu');
+        if (ringCpu) {
+          ringCpu.style.strokeDashoffset = cpuOffset;
+          document.getElementById('casa-cpu-val').textContent = `${Math.round(cpuPercent)}%`;
+          document.getElementById('casa-cpu-temp').textContent = `${sysData.cpu.temp}°C`;
+        }
+
+        // 2. RAM Ring
+        const ramPercent = sysData.ram.percent;
+        const ramOffset = 251.2 - (ramPercent / 100) * 251.2;
+        const ringRam = document.getElementById('casa-ring-ram');
+        if (ringRam) {
+          ringRam.style.strokeDashoffset = ramOffset;
+          document.getElementById('casa-ram-val').textContent = `${Math.round(ramPercent)}%`;
+          document.getElementById('casa-ram-used').textContent = `${sysData.ram.used.toFixed(1)} / ${sysData.ram.total.toFixed(1)} GB`;
+        }
+
         // Propagar estadísticas si la aplicación Monitor de Recursos está abierta
         if (this.windows['resource-monitor'] && window.ResourceMonitorApp) {
           window.ResourceMonitorApp.updateStats(sysData);
@@ -876,6 +925,16 @@ class DesktopManager {
           document.getElementById('widget-vol-title').textContent = `Volumen (${mainMount.type}) en ${mainMount.mount}`;
           document.getElementById('widget-storage-bar').style.width = `${mainMount.usePercent}%`;
           document.getElementById('widget-storage-text').textContent = `Usado: ${mainMount.used} GB / ${mainMount.size} GB (${mainMount.usePercent}%)`;
+
+          // 3. Storage Ring (CasaOS)
+          const storagePercent = mainMount.usePercent;
+          const storageOffset = 251.2 - (storagePercent / 100) * 251.2;
+          const ringStorage = document.getElementById('casa-ring-storage');
+          if (ringStorage) {
+            ringStorage.style.strokeDashoffset = storageOffset;
+            document.getElementById('casa-storage-val').textContent = `${Math.round(storagePercent)}%`;
+            document.getElementById('casa-storage-used').textContent = `${mainMount.used} / ${mainMount.size} GB`;
+          }
         }
         
       } catch (error) {
@@ -1081,6 +1140,149 @@ class DesktopManager {
         modalOverlay.remove();
       }
     });
+  }
+
+  async updateCasaDashboard() {
+    const grid = document.getElementById('casa-apps-grid');
+    if (!grid) return;
+
+    try {
+      // 1. Obtener contenedores desde el backend
+      const res = await fetch(`${API_BASE}/api/docker/containers`);
+      const containers = await res.json();
+
+      // 2. Definir catálogo estático coincidente
+      const availablePackages = {
+        jellyfin: { name: 'Jellyfin', port: 8096, iconBg: '#68217a', init: 'J' },
+        qbittorrent: { name: 'qBittorrent', port: 8080, iconBg: '#2b5797', init: 'Q' },
+        nextcloud: { name: 'Nextcloud', port: 8001, iconBg: '#0078d7', init: 'N' },
+        portainer: { name: 'Portainer CE', port: 9000, iconBg: '#2a5a9c', init: 'P' },
+        vscode: { name: 'VS Code Server', port: 8443, iconBg: '#007acc', init: 'V' },
+        pihole: { name: 'Pi-hole', port: 8053, iconBg: '#f25022', init: 'H' }
+      };
+
+      if (containers.length === 0) {
+        grid.innerHTML = `
+          <div class="casa-empty-state">
+            <p>No hay aplicaciones instaladas aún.</p>
+            <p style="font-size:10px; margin-top:4px;">Abre el Centro de Paquetes en la columna izquierda para instalar tu primera aplicación.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = '';
+
+      containers.forEach(container => {
+        const pkgKey = container.icon;
+        const pkg = availablePackages[pkgKey] || { name: container.name, port: 80, iconBg: '#512bd4', init: container.name[0] };
+
+        const isRunning = container.state === 'running';
+        const card = document.createElement('div');
+        card.className = `casa-app-card ${isRunning ? 'running' : 'stopped'}`;
+        card.id = `casa-card-${container.id}`;
+
+        card.innerHTML = `
+          <div class="casa-app-icon-container" style="background-color: ${pkg.iconBg};">
+            ${pkg.init}
+            <span class="casa-app-status-dot ${isRunning ? 'active' : ''}"></span>
+          </div>
+          <div class="casa-app-info">
+            <h4 class="casa-app-name">${pkg.name}</h4>
+            <span class="casa-app-port">Puerto: ${pkg.port}</span>
+          </div>
+          <div class="casa-app-actions">
+            ${isRunning 
+              ? `<button class="casa-action-btn btn-open" title="Abrir Aplicación" data-port="${pkg.port}">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                  </svg>
+                 </button>
+                 <button class="casa-action-btn btn-stop" title="Detener Contenedor" data-container-id="${container.id}">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                  </svg>
+                 </button>`
+              : `<button class="casa-action-btn btn-play" title="Iniciar Contenedor" data-container-id="${container.id}">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                 </button>`
+            }
+          </div>
+        `;
+
+        // Vincular acciones
+        // 1. Abrir
+        const btnOpen = card.querySelector('.btn-open');
+        if (btnOpen) {
+          btnOpen.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const hostIp = window.location.hostname;
+            window.open(`http://${hostIp}:${pkg.port}`, '_blank');
+          });
+        }
+
+        // 2. Detener
+        const btnStop = card.querySelector('.btn-stop');
+        if (btnStop) {
+          btnStop.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            btnStop.style.pointerEvents = 'none';
+            btnStop.style.opacity = '0.5';
+            await this.callDockerAction(container.id, 'stop');
+          });
+        }
+
+        // 3. Iniciar
+        const btnPlay = card.querySelector('.btn-play');
+        if (btnPlay) {
+          btnPlay.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            btnPlay.style.pointerEvents = 'none';
+            btnPlay.style.opacity = '0.5';
+            await this.callDockerAction(container.id, 'start');
+          });
+        }
+
+        // Al hacer clic en la tarjeta, si está corriendo se abre
+        card.addEventListener('click', () => {
+          if (isRunning) {
+            const hostIp = window.location.hostname;
+            window.open(`http://${hostIp}:${pkg.port}`, '_blank');
+          } else {
+            alert(`La aplicación ${pkg.name} está detenida. Haz clic en el botón de reproducción (Play) para iniciarla.`);
+          }
+        });
+
+        grid.appendChild(card);
+      });
+    } catch (e) {
+      console.error('Error actualizando grid CasaOS:', e);
+    }
+  }
+
+  async callDockerAction(id, action) {
+    try {
+      const res = await fetch(`${API_BASE}/api/docker/${action}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id })
+      });
+      if (res.ok) {
+        // Recargar paquetes en el package-center si está instanciado
+        if (window.PackageCenterApp && typeof window.PackageCenterApp.loadPackages === 'function') {
+          window.PackageCenterApp.loadPackages();
+        } else {
+          this.updateCasaDashboard();
+        }
+      } else {
+        alert('Error ejecutando comando Docker.');
+      }
+    } catch (e) {
+      console.error(e);
+      alert('Error de conexión.');
+    }
   }
 
   pushDesktopNotification(title, message) {

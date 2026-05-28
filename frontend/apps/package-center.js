@@ -85,6 +85,9 @@ class PackageCenter {
       const res = await fetch(`${window.location.origin}/api/docker/containers`);
       this.containers = await res.json();
       this.renderPackages();
+      if (window.DSM_Desktop && typeof window.DSM_Desktop.updateCasaDashboard === 'function') {
+        window.DSM_Desktop.updateCasaDashboard();
+      }
     } catch (e) {
       console.error('Error al cargar paquetes docker:', e);
     }
