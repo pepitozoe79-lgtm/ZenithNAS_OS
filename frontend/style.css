@@ -1,0 +1,1674 @@
+/* =====================================================================
+   SYNOLOGY DSM - ESTILOS COMPLETOS Y DISEÑO PREMIUM GLASSMORPHIC
+   ===================================================================== */
+
+/* 1. Reset e Inicialización de Estilos Core */
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  
+  /* Sistema de Color Glassmorphism - Oscuro por defecto (Premium NAS Style) */
+  --bg-desktop: radial-gradient(circle at 10% 20%, rgb(4, 18, 48) 0%, rgb(17, 3, 31) 90.2%);
+  --bg-glass-heavy: rgba(18, 22, 33, 0.85);
+  --bg-glass-medium: rgba(22, 28, 45, 0.65);
+  --bg-glass-light: rgba(255, 255, 255, 0.08);
+  --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+  --border-glass-bright: 1px solid rgba(255, 255, 255, 0.2);
+  --shadow-premium: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
+  --shadow-window: 0 20px 50px rgba(0, 0, 0, 0.6);
+  
+  /* Paleta de colores Synology */
+  --syno-blue: #007bff;
+  --syno-blue-glow: rgba(0, 123, 255, 0.4);
+  --syno-green: #2ecc71;
+  --syno-green-glow: rgba(46, 204, 113, 0.4);
+  --syno-yellow: #f1c40f;
+  --syno-red: #e74c3c;
+  --syno-text-main: #f3f4f6;
+  --syno-text-muted: #9ca3af;
+  --syno-text-dark: #1f2937;
+  
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-fast: all 0.15s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-primary);
+  color: var(--syno-text-main);
+  overflow: hidden;
+  background: rgb(17, 3, 31);
+}
+
+/* 2. Contenedor del Escritorio Virtual */
+#desktop {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-desktop);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 3. Barra de Tareas Superior (Taskbar DSM 7) */
+#taskbar {
+  height: 48px;
+  background: var(--bg-glass-heavy);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 9999;
+}
+
+.taskbar-left, .taskbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Botón de Inicio Estilo Logo */
+#btn-start {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+  transition: var(--transition-smooth);
+}
+
+#btn-start:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(29, 78, 216, 0.5);
+}
+
+#btn-start:active {
+  transform: scale(0.95);
+}
+
+/* Aplicaciones abiertas en barra de tareas */
+#open-apps-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+}
+
+.taskbar-app-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  height: 34px;
+  background: var(--bg-glass-light);
+  border: var(--border-glass);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: var(--transition-fast);
+}
+
+.taskbar-app-tab:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.taskbar-app-tab.active {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: var(--syno-blue);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
+.taskbar-app-tab svg {
+  color: var(--syno-text-main);
+}
+
+/* Indicador de Velocidad de Red en Barra */
+#network-speed-indicator {
+  font-size: 11px;
+  font-family: var(--font-primary);
+  color: var(--syno-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+#network-speed-indicator span {
+  color: var(--syno-text-main);
+  font-weight: 600;
+}
+
+/* Botones genéricos de barra de tareas */
+.taskbar-btn {
+  background: transparent;
+  border: none;
+  color: var(--syno-text-main);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.taskbar-btn:hover {
+  background: var(--bg-glass-light);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: var(--syno-red);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--bg-glass-heavy);
+}
+
+/* Reloj Digital */
+#system-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: var(--transition-fast);
+}
+
+#system-clock:hover {
+  background: var(--bg-glass-light);
+}
+
+#clock-time {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+#clock-date {
+  font-size: 10px;
+  color: var(--syno-text-muted);
+}
+
+/* 4. Área del Escritorio */
+#desktop-area {
+  flex: 1;
+  display: flex;
+  position: relative;
+  padding: 16px;
+}
+
+/* Iconos de Escritorio */
+#desktop-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-auto-rows: 95px;
+  gap: 16px;
+  width: calc(100% - 320px); /* Deja espacio para widgets a la derecha */
+  height: 100%;
+  align-content: flex-start;
+  z-index: 10;
+}
+
+.desktop-shortcut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 8px 4px;
+  border: 1px solid transparent;
+  transition: var(--transition-smooth);
+  text-align: center;
+}
+
+.desktop-shortcut:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.shortcut-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 8px;
+  color: white;
+  transition: var(--transition-smooth);
+}
+
+/* Gradientes específicos para iconos premium */
+.icon-resource {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%); /* Esmeralda */
+}
+
+.icon-file {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); /* Ambar */
+}
+
+.icon-package {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); /* Azul */
+}
+
+.icon-control {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); /* Gris */
+}
+
+.desktop-shortcut:hover .shortcut-icon {
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.shortcut-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 5. Widgets Laterales del Escritorio */
+#desktop-widgets {
+  width: 290px;
+  height: 100%;
+  position: absolute;
+  right: 16px;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+  z-index: 20;
+  pointer-events: auto;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.widget {
+  background: var(--bg-glass-heavy);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: var(--border-glass);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow-premium);
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+}
+
+.widget-header h4 {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--syno-text-main);
+  letter-spacing: 0.5px;
+}
+
+.widget-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.widget-dot.green {
+  background: var(--syno-green);
+  box-shadow: 0 0 8px var(--syno-green-glow);
+}
+
+/* Widget Salud del Sistema */
+.health-overview {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.health-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.health-icon.green {
+  background: rgba(46, 204, 113, 0.15);
+  color: var(--syno-green);
+  border: 1px solid rgba(46, 204, 113, 0.25);
+}
+
+.health-status {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.system-uptime {
+  font-size: 11px;
+  color: var(--syno-text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.widget-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.metric-label {
+  width: 32px;
+  color: var(--syno-text-muted);
+}
+
+.metric-bar-container {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  margin: 0 12px;
+  overflow: hidden;
+}
+
+.metric-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6 0%, #10b981 100%);
+  border-radius: 3px;
+  transition: width 1s ease-out;
+}
+
+.metric-bar.storage-bar {
+  background: linear-gradient(90deg, #f59e0b 0%, #3b82f6 100%);
+}
+
+.metric-value {
+  width: 32px;
+  text-align: right;
+  font-weight: 600;
+  color: var(--syno-text-main);
+}
+
+/* Widget Almacenamiento */
+.storage-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.storage-icon {
+  color: var(--syno-blue);
+  background: rgba(59, 130, 246, 0.15);
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.storage-details {
+  flex: 1;
+}
+
+.volume-title {
+  font-size: 12px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.volume-cap {
+  font-size: 10px;
+  color: var(--syno-text-muted);
+  display: block;
+  margin-top: 6px;
+}
+
+/* 6. Ventana General (Window Manager Layout) */
+.window {
+  position: absolute;
+  background: var(--bg-glass-heavy);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: var(--border-glass-bright);
+  border-radius: 12px;
+  box-shadow: var(--shadow-window);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 100;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Efectos al enfocar ventana */
+.window.active-window {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* Cabecera de Ventana */
+.window-header {
+  height: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  cursor: move;
+}
+
+.window-title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.window-title-container svg {
+  color: var(--syno-text-muted);
+}
+
+.window-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--syno-text-main);
+}
+
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.win-btn {
+  background: transparent;
+  border: none;
+  color: var(--syno-text-muted);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.win-btn:hover {
+  background: var(--bg-glass-light);
+  color: var(--syno-text-main);
+}
+
+.win-btn-close:hover {
+  background: var(--syno-red);
+  color: white;
+}
+
+/* Contenido Principal de Ventana */
+.window-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 7. App: Monitor de Recursos (Resource Monitor) */
+.res-mon-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.res-mon-tabs {
+  width: 140px;
+  background: rgba(0, 0, 0, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.res-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--syno-text-muted);
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  border-left: 3px solid transparent;
+}
+
+.res-tab-btn:hover {
+  background: var(--bg-glass-light);
+  color: var(--syno-text-main);
+}
+
+.res-tab-btn.active {
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--syno-blue);
+  border-left-color: var(--syno-blue);
+}
+
+.res-mon-body {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.chart-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.chart-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.chart-stat-box {
+  background: rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+
+.chart-stat-val {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--syno-blue);
+  margin-bottom: 2px;
+}
+
+.chart-stat-lbl {
+  font-size: 10px;
+  color: var(--syno-text-muted);
+}
+
+.canvas-container {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  border: var(--border-glass);
+  min-height: 200px;
+  position: relative;
+}
+
+.canvas-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 8. App: File Station (Explorador de Archivos) */
+.file-station-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.file-toolbar {
+  height: 42px;
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.file-actions-left, .file-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.file-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: var(--border-glass);
+  color: var(--syno-text-main);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.file-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.file-path-bar {
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: var(--syno-text-muted);
+}
+
+.file-workspace {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Árbol Lateral de Carpetas */
+.file-sidebar {
+  width: 180px;
+  background: rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 6px;
+  overflow-y: auto;
+}
+
+.folder-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--syno-text-muted);
+  transition: var(--transition-fast);
+}
+
+.folder-tree-item:hover, .folder-tree-item.active {
+  background: var(--bg-glass-light);
+  color: var(--syno-text-main);
+}
+
+/* Rejilla de Archivos */
+.file-main-view {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  grid-auto-rows: 95px;
+  gap: 12px;
+  align-content: flex-start;
+}
+
+.file-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 8px 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: var(--transition-fast);
+}
+
+.file-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.file-icon {
+  margin-bottom: 6px;
+}
+
+.file-icon-dir {
+  color: #ffb020;
+}
+
+.file-icon-file {
+  color: #7ab4ff;
+}
+
+.file-name {
+  font-size: 11px;
+  word-break: break-all;
+  max-width: 80px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 9. App: Centro de Paquetes (Package Center) */
+.package-center-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.package-sidebar {
+  width: 150px;
+  background: rgba(0, 0, 0, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.package-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--syno-text-muted);
+  padding: 10px 14px;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.package-tab-btn:hover, .package-tab-btn.active {
+  background: var(--bg-glass-light);
+  color: var(--syno-text-main);
+}
+
+.package-main-view {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.package-title-section {
+  margin-bottom: 20px;
+}
+
+.package-title-section h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.package-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: var(--border-glass);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.package-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.pkg-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.pkg-jellyfin { background: #3f2b96; }
+.pkg-qbittorrent { background: #1c52b0; }
+.pkg-nextcloud { background: #0082c9; }
+.pkg-portainer { background: #0c3c60; }
+.pkg-vscode { background: #007acc; }
+.pkg-pihole { background: #960000; }
+
+.pkg-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.pkg-desc {
+  font-size: 10px;
+  color: var(--syno-text-muted);
+  margin-bottom: 16px;
+  min-height: 30px;
+}
+
+.pkg-btn-install {
+  width: 100%;
+  background: var(--syno-blue);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.pkg-btn-install:hover {
+  background: #1d4ed8;
+}
+
+.pkg-btn-action {
+  width: 48%;
+  padding: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.pkg-btn-open {
+  background: var(--syno-green);
+  color: white;
+}
+
+.pkg-btn-stop {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--syno-text-main);
+  border: var(--border-glass);
+}
+
+.pkg-installed-actions {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Barra de Carga de Instalación */
+.pkg-install-progress {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 10px;
+  display: none;
+}
+
+.pkg-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--syno-blue);
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+/* 10. App: Panel de Control (Control Panel) */
+.ctrl-panel-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.ctrl-sidebar {
+  width: 160px;
+  background: rgba(0, 0, 0, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 6px;
+  overflow-y: auto;
+}
+
+.ctrl-main-view {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.ctrl-section-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.ctrl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.ctrl-card {
+  background: rgba(0, 0, 0, 0.15);
+  border: var(--border-glass);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.ctrl-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 12px;
+}
+
+.ctrl-row:last-child {
+  border-bottom: none;
+}
+
+.ctrl-row-lbl {
+  color: var(--syno-text-muted);
+}
+
+.ctrl-row-val {
+  font-weight: 600;
+  color: var(--syno-text-main);
+  text-align: right;
+}
+
+/* Botones de navegación en el panel de control */
+.ctrl-side-btn {
+  background: transparent;
+  border: none;
+  color: var(--syno-text-muted);
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  margin-bottom: 4px;
+  border-left: 3px solid transparent;
+}
+
+.ctrl-side-btn:hover {
+  background: var(--bg-glass-light);
+  color: var(--syno-text-main);
+}
+
+.ctrl-side-btn.active {
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--syno-blue);
+  border-left-color: var(--syno-blue);
+}
+
+.ctrl-input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.ctrl-input-group label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--syno-text-muted);
+  margin-bottom: 6px;
+}
+
+.ctrl-section {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* 11. Menú de Aplicaciones (App Launcher) - Overlay */
+#app-launcher-overlay {
+  position: absolute;
+  left: 0;
+  top: 48px;
+  width: 100%;
+  height: calc(100% - 48px);
+  background: rgba(10, 13, 21, 0.85);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#app-launcher-overlay.hidden {
+  opacity: 0;
+  transform: scale(0.98);
+  pointer-events: none;
+}
+
+.launcher-search {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: var(--border-glass);
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  padding: 0 16px;
+  margin-bottom: 40px;
+}
+
+.launcher-search input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  height: 48px;
+  font-size: 14px;
+  outline: none;
+  font-family: var(--font-primary);
+}
+
+.launcher-search input::placeholder {
+  color: var(--syno-text-muted);
+}
+
+.search-icon {
+  color: var(--syno-text-muted);
+  margin-right: 12px;
+}
+
+.launcher-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.launcher-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-align: center;
+}
+
+.launcher-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  color: white;
+  transition: var(--transition-smooth);
+}
+
+.launcher-item:hover {
+  transform: translateY(-4px);
+}
+
+.launcher-item:hover .launcher-icon {
+  transform: scale(1.06);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+}
+
+.launcher-item span {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--syno-text-main);
+  max-width: 100px;
+}
+
+/* 12. Centro de Notificaciones Lateral */
+#notification-sidebar {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 320px;
+  height: calc(100% - 48px);
+  background: var(--bg-glass-heavy);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-left: var(--border-glass);
+  box-shadow: var(--shadow-premium);
+  z-index: 9997;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#notification-sidebar.hidden-sidebar {
+  transform: translateX(100%);
+}
+
+.sidebar-header {
+  height: 52px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.sidebar-header h3 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sidebar-header button {
+  background: transparent;
+  border: none;
+  color: var(--syno-blue);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: var(--border-glass);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  transition: var(--transition-fast);
+}
+
+.notification-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.notif-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notif-icon.info { background: rgba(59, 130, 246, 0.15); color: var(--syno-blue); }
+.notif-icon.success { background: rgba(46, 204, 113, 0.15); color: var(--syno-green); }
+
+.notif-body {
+  flex: 1;
+}
+
+.notif-title {
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.notif-desc {
+  font-size: 10px;
+  color: var(--syno-text-muted);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.notif-time {
+  font-size: 9px;
+  color: var(--syno-text-muted);
+}
+
+/* 13. Barra de Desplazamiento Personalizada */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* 14. App: Download Station (Gestor de Descargas y BitTorrent) */
+.icon-download {
+  background: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%); /* Cyan a Azul */
+}
+
+.download-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.dl-sidebar {
+  width: 150px;
+  background: rgba(0, 0, 0, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dl-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--syno-text-muted);
+  padding: 10px 14px;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dl-tab-btn:hover, .dl-tab-btn.active {
+  background: var(--bg-glass-light);
+  color: var(--syno-text-main);
+}
+
+.dl-count-badge {
+  font-size: 9px;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--syno-text-main);
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.dl-main-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dl-toolbar {
+  height: 42px;
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.dl-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dl-row {
+  background: rgba(0, 0, 0, 0.15);
+  border: var(--border-glass);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  transition: var(--transition-fast);
+  cursor: pointer;
+}
+
+.dl-row:hover {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
+}
+
+.dl-row.active {
+  border-color: var(--syno-blue);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.dl-info-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dl-row-title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dl-row-type-badge {
+  font-size: 8px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.dl-row-type-badge.torrent {
+  background: rgba(46, 204, 113, 0.15);
+  color: var(--syno-green);
+}
+
+.dl-row-type-badge.direct {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--syno-blue);
+}
+
+.dl-row-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--syno-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+.dl-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dl-progress-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.dl-progress-bar-fill {
+  height: 100%;
+  background: var(--syno-blue);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.dl-progress-bar-fill.completed {
+  background: var(--syno-green);
+}
+
+.dl-progress-bar-fill.paused {
+  background: var(--syno-text-muted);
+}
+
+.dl-progress-bar-fill.failed {
+  background: var(--syno-red);
+}
+
+.dl-row-percent {
+  font-size: 11px;
+  font-weight: 700;
+  width: 32px;
+  text-align: right;
+}
+
+.dl-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 10px;
+  color: var(--syno-text-muted);
+}
+
+.dl-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dl-meta-item span {
+  color: var(--syno-text-main);
+  font-weight: 600;
+}
+
+.dl-status-col {
+  width: 110px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.dl-status-text {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.dl-status-text.downloading { color: var(--syno-blue); }
+.dl-status-text.completed { color: var(--syno-green); }
+.dl-status-text.paused { color: var(--syno-text-muted); }
+.dl-status-text.failed { color: var(--syno-red); }
+
+.dl-eta-text {
+  font-size: 9px;
+  color: var(--syno-text-muted);
+}
+
+/* 15. Ventanas Modales de Interacción USB */
+.usb-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 10, 16, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.usb-modal-card {
+  background: var(--bg-glass-heavy);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  border: var(--border-glass-bright);
+  border-radius: 14px;
+  width: 380px;
+  padding: 24px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+  animation: scaleIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.usb-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
+}
+
+.usb-modal-header h4 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--syno-text-main);
+  letter-spacing: 0.2px;
+}
+
+.usb-modal-body {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--syno-text-main);
+}
+
+.usb-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.usb-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.usb-btn-mount {
+  background: var(--syno-blue);
+  color: white;
+}
+
+.usb-btn-mount:hover {
+  background: #1d4ed8;
+}
+
+.usb-btn-format {
+  background: rgba(255, 255, 255, 0.06);
+  border: var(--border-glass);
+  color: var(--syno-text-main);
+}
+
+.usb-btn-format:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.usb-btn-ignore {
+  background: transparent;
+  color: var(--syno-text-muted);
+}
+
+.usb-btn-ignore:hover {
+  color: var(--syno-text-main);
+  background: rgba(255,255,255,0.05);
+}
+
+/* Spinner de Formateo USB */
+.usb-loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--syno-blue);
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: usbSpin 1s linear infinite;
+}
+
+@keyframes usbSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Modificadores Utilitarios */
+.hidden {
+  display: none !important;
+}

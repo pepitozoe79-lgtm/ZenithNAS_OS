@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenithNAS - The Peak of DIY Network Storage</title>
+  <!-- Google Fonts - Outfit e Inter para legibilidad premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Contenedor del Escritorio DSM -->
+  <div id="desktop">
+    
+    <!-- Barra de Tareas Superior (Taskbar) -->
+    <header id="taskbar">
+      <div class="taskbar-left">
+        <!-- Botón Menú Principal (Logo DSM Estilizado) -->
+        <button id="btn-start" title="Menú Principal">
+          <svg viewBox="0 0 24 24" width="22" height="22">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" fill="currentColor"/>
+            <rect x="14" y="3" width="7" height="7" rx="1.5" fill="currentColor"/>
+            <rect x="3" y="14" width="7" height="7" rx="1.5" fill="currentColor"/>
+            <rect x="14" y="14" width="7" height="7" rx="1.5" fill="currentColor"/>
+          </svg>
+        </button>
+        <!-- Contenedor de ventanas abiertas en la barra de tareas -->
+        <div id="open-apps-container"></div>
+      </div>
+      
+      <div class="taskbar-right">
+        <!-- Conectividad y Estado del Sistema -->
+        <div class="system-status-indicator" id="network-speed-indicator">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z" fill="currentColor"/>
+          </svg>
+          <span id="speed-tx">0 KB/s</span> ↑ <span id="speed-rx">0 KB/s</span> ↓
+        </div>
+        
+        <!-- Botón de Centro de Notificaciones -->
+        <button class="taskbar-btn" id="btn-notifications" title="Notificaciones">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notification-badge" id="notif-badge">2</span>
+        </button>
+
+        <!-- Widget Toggle -->
+        <button class="taskbar-btn" id="btn-widgets-toggle" title="Mostrar/Ocultar Widgets" class="active">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="9" rx="1"/>
+            <rect x="14" y="3" width="7" height="5" rx="1"/>
+            <rect x="14" y="12" width="7" height="9" rx="1"/>
+            <rect x="3" y="16" width="7" height="5" rx="1"/>
+          </svg>
+        </button>
+        
+        <!-- Reloj e Información Temporal -->
+        <div id="system-clock" title="Ver Calendario">
+          <span id="clock-time">12:00</span>
+          <span id="clock-date">28 May 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Área Principal de Iconos y Ventanas -->
+    <main id="desktop-area">
+      
+      <!-- Iconos del Escritorio (Grid Layout) -->
+      <div id="desktop-icons">
+        <div class="desktop-shortcut" data-app="resource-monitor">
+          <div class="shortcut-icon icon-resource">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+            </svg>
+          </div>
+          <span class="shortcut-label">Monitor de Recursos</span>
+        </div>
+
+        <div class="desktop-shortcut" data-app="file-station">
+          <div class="shortcut-icon icon-file">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor">
+              <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/>
+            </svg>
+          </div>
+          <span class="shortcut-label">File Station</span>
+        </div>
+
+        <div class="desktop-shortcut" data-app="package-center">
+          <div class="shortcut-icon icon-package">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <span class="shortcut-label">Centro de Paquetes</span>
+        </div>
+
+        <div class="desktop-shortcut" data-app="control-panel">
+          <div class="shortcut-icon icon-control">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor">
+              <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+            </svg>
+          </div>
+          <span class="shortcut-label">Panel de Control</span>
+        </div>
+
+        <div class="desktop-shortcut" data-app="download-station">
+          <div class="shortcut-icon icon-download">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+            </svg>
+          </div>
+          <span class="shortcut-label">Download Station</span>
+        </div>
+      </div>
+
+      <!-- Contenedor Dinámico de Ventanas Abiertas -->
+      <div id="windows-container"></div>
+
+      <!-- Widgets del Escritorio (Derecha, al estilo DSM) -->
+      <aside id="desktop-widgets">
+        <!-- Widget 1: Salud del Sistema -->
+        <section class="widget" id="widget-health">
+          <div class="widget-header">
+            <h4>Estado del Sistema</h4>
+            <span class="widget-dot green"></span>
+          </div>
+          <div class="widget-body">
+            <div class="health-overview">
+              <div class="health-icon green">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+              </div>
+              <div class="health-details">
+                <p class="health-status">Su NAS es saludable</p>
+                <span class="system-uptime" id="uptime-text">Uptime: 0h 0m</span>
+              </div>
+            </div>
+            
+            <div class="widget-metrics">
+              <div class="metric-row">
+                <span class="metric-label">CPU</span>
+                <div class="metric-bar-container">
+                  <div class="metric-bar" id="widget-cpu-bar" style="width: 0%"></div>
+                </div>
+                <span class="metric-value" id="widget-cpu-text">0%</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">RAM</span>
+                <div class="metric-bar-container">
+                  <div class="metric-bar" id="widget-ram-bar" style="width: 0%"></div>
+                </div>
+                <span class="metric-value" id="widget-ram-text">0%</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Widget 2: Almacenamiento -->
+        <section class="widget" id="widget-storage">
+          <div class="widget-header">
+            <h4>Almacenamiento</h4>
+          </div>
+          <div class="widget-body">
+            <div class="storage-info">
+              <div class="storage-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+              </div>
+              <div class="storage-details">
+                <span class="volume-title" id="widget-vol-title">Volumen 1 (Btrfs)</span>
+                <div class="metric-bar-container">
+                  <div class="metric-bar storage-bar" id="widget-storage-bar" style="width: 0%"></div>
+                </div>
+                <span class="volume-cap" id="widget-storage-text">Usado: 0 GB / 0 GB (0%)</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+    </main>
+  </div>
+
+  <!-- Menú de Aplicaciones Completo (Launchpad / Start Menu Overlay) -->
+  <div id="app-launcher-overlay" class="hidden">
+    <div class="launcher-search">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="search-icon">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="launcher-search-input" placeholder="Buscar aplicaciones o configuraciones...">
+    </div>
+    
+    <div class="launcher-grid">
+      <div class="launcher-item" data-app="resource-monitor">
+        <div class="launcher-icon icon-resource">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+          </svg>
+        </div>
+        <span>Monitor de Recursos</span>
+      </div>
+
+      <div class="launcher-item" data-app="file-station">
+        <div class="launcher-icon icon-file">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+            <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/>
+          </svg>
+        </div>
+        <span>File Station</span>
+      </div>
+
+      <div class="launcher-item" data-app="package-center">
+        <div class="launcher-icon icon-package">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span>Centro de Paquetes</span>
+      </div>
+
+      <div class="launcher-item" data-app="control-panel">
+        <div class="launcher-icon icon-control">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+            <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+          </svg>
+        </div>
+        <span>Panel de Control</span>
+      </div>
+
+      <div class="launcher-item" data-app="download-station">
+        <div class="launcher-icon icon-download">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+          </svg>
+        </div>
+        <span>Download Station</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Centro de Notificaciones Lateral -->
+  <div id="notification-sidebar" class="hidden-sidebar">
+    <div class="sidebar-header">
+      <h3>Notificaciones</h3>
+      <button id="clear-notifications">Limpiar Todo</button>
+    </div>
+    <div class="sidebar-content">
+      <div class="notification-item">
+        <div class="notif-icon info">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+          </svg>
+        </div>
+        <div class="notif-body">
+          <p class="notif-title">Servidor NAS Iniciado</p>
+          <p class="notif-desc">El backend Node.js se ha conectado con éxito a Ubuntu 24.04.</p>
+          <span class="notif-time">Hace 5 min</span>
+        </div>
+      </div>
+      <div class="notification-item">
+        <div class="notif-icon success">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </div>
+        <div class="notif-body">
+          <p class="notif-title">Docker API Lista</p>
+          <p class="notif-desc">La integración de contenedores para el Package Center está activa.</p>
+          <span class="notif-time">Hace 4 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carga de las Aplicaciones de Control y Ventanas del Cliente -->
+  <script src="apps/resource-monitor.js"></script>
+  <script src="apps/file-station.js"></script>
+  <script src="apps/package-center.js"></script>
+  <script src="apps/download-station.js"></script>
+  <!-- Script Core de Control del Entorno de Escritorio -->
+  <script src="app.js"></script>
+</body>
+</html>

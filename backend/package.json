@@ -1,0 +1,16 @@
+{
+  "name": "dsm-nas-backend",
+  "version": "1.0.0",
+  "description": "Backend daemon for Synology DSM-style NAS Web Desktop running on Ubuntu 24.04 LTS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "systeminformation": "^5.22.9"
+  },
+  "author": "Antigravity NAS Builder",
+  "license": "MIT"
+}
