@@ -164,6 +164,6 @@ Para montar un disco externo para que el panel lo visualice y File Station pueda
 
 ## 🦆 Agradecimientos y Mención Honorífica
 
-Quiero hacer una mención honorífica y un agradecimiento muy especial a mi maestro, **@elpato001**. Gracias a sus conocimientos transmitidos, su dedicación y sus enseñanzas a lo largo de este camino, la evolución de este proyecto y mis habilidades como desarrollador han llegado a un nuevo y extraordinario nivel. ¡Gracias eternas, maestro!
+Quiero hacer una mención honorífica y un agradecimiento muy especial a mi maestro, [**@elpato001**](https://github.com/elpato001). Gracias a sus conocimientos transmitidos, su dedicación y sus enseñanzas a lo largo de este camino, la evolución de este proyecto y mis habilidades como desarrollador han llegado a un nuevo y extraordinario nivel. ¡Gracias eternas, maestro!
 
 *Hecho con ❤️ para la comunidad Open Source y Home Servers.*
