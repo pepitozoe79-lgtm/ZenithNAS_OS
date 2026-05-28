@@ -1,5 +1,5 @@
 /* =====================================================================
-   SYNOLOGY DSM - ESTILOS COMPLETOS Y DISEÑO PREMIUM GLASSMORPHIC
+   SYNOLOGY DSM - ESTILOS COMPLETOS Y DISEÑO INTUITIVO GLASSMORPHIC
    ===================================================================== */
 
 /* 1. Reset e Inicialización de Estilos Core */
@@ -7,14 +7,14 @@
   --font-primary: 'Inter', sans-serif;
   --font-display: 'Outfit', sans-serif;
   
-  /* Sistema de Color Glassmorphism - Oscuro por defecto (Premium NAS Style) */
+  /* Sistema de Color Glassmorphism - Oscuro por defecto (Intuitivo NAS Style) */
   --bg-desktop: radial-gradient(circle at 10% 20%, rgb(4, 18, 48) 0%, rgb(17, 3, 31) 90.2%);
   --bg-glass-heavy: rgba(18, 22, 33, 0.85);
   --bg-glass-medium: rgba(22, 28, 45, 0.65);
   --bg-glass-light: rgba(255, 255, 255, 0.08);
   --border-glass: 1px solid rgba(255, 255, 255, 0.1);
   --border-glass-bright: 1px solid rgba(255, 255, 255, 0.2);
-  --shadow-premium: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
+  --shadow-intuitiva: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
   --shadow-window: 0 20px 50px rgba(0, 0, 0, 0.6);
   
   /* Paleta de colores Synology */
@@ -279,7 +279,7 @@ body, html {
   transition: var(--transition-smooth);
 }
 
-/* Gradientes específicos para iconos premium */
+/* Gradientes específicos para iconos intuitivos */
 .icon-resource {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%); /* Esmeralda */
 }
@@ -334,7 +334,7 @@ body, html {
   border: var(--border-glass);
   border-radius: 12px;
   padding: 16px;
-  box-shadow: var(--shadow-premium);
+  box-shadow: var(--shadow-intuitiva);
 }
 
 .widget-header {
@@ -1208,7 +1208,7 @@ body, html {
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   border-left: var(--border-glass);
-  box-shadow: var(--shadow-premium);
+  box-shadow: var(--shadow-intuitiva);
   z-index: 9997;
   display: flex;
   flex-direction: column;

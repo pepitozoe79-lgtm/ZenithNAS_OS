@@ -39,7 +39,7 @@ estará disponible a través de la interfaz de File Station.
 Puedes crear directorios, borrar archivos o subir nuevos
 documentos directamente desde el navegador web.
 
-Disfruta de la experiencia premium estilo Synology DSM.
+Disfruta de la experiencia intuitiva estilo Synology DSM.
 `, 'utf8');
     }
   } catch (error) {

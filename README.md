@@ -1,6 +1,6 @@
 # 🚀 Synology DSM-style NAS Admin Panel for Debian & Ubuntu Server
 
-Este proyecto es un panel de administración web premium e interactivo con estilo **Synology DiskStation Manager (DSM 7.2)** diseñado específicamente para correr sobre servidores Linux minimalistas, siendo 100% compatible y certificado para **Debian 12 / 13 (Trixie)** y **Ubuntu Server (20.04, 22.04 y 24.04 LTS)**.
+Este proyecto es un panel de administración web intuitivo e interactivo con estilo **Synology DiskStation Manager (DSM 7.2)** diseñado específicamente para correr sobre servidores Linux minimalistas, siendo 100% compatible y certificado para **Debian 12 / 13 (Trixie)** y **Ubuntu Server (20.04, 22.04 y 24.04 LTS)**.
 
 Combina una interfaz frontend espectacular de tipo escritorio web (frosted glass/glassmorphism con HTML5/CSS3/Vanilla JS) con un backend ligero en Node.js que ejecuta comandos reales del sistema operativo para monitorizar y controlar tu servidor.
 
@@ -8,7 +8,7 @@ Combina una interfaz frontend espectacular de tipo escritorio web (frosted glass
 
 ## 📸 Capturas de Pantalla (ZenithNAS OS)
 
-Aquí puedes ver la interfaz premium con efecto **Glassmorphic** de ZenithNAS OS en acción:
+Aquí puedes ver la interfaz intuitiva con efecto **Glassmorphic** de ZenithNAS OS en acción:
 
 | **Escritorio Web & Widgets** | **Download Station** |
 |:---:|:---:|
