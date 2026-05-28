@@ -159,3 +159,11 @@ Para montar un disco externo para que el panel lo visualice y File Station pueda
    - **FAT32 (VFAT)**: `sudo mount -t vfat /dev/sdb1 /media/mi_disco`
 
 ¡Una vez montado, el disco aparecerá instantáneamente en el Monitor de Almacenamiento y en la lista de dispositivos de tu panel web!
+
+---
+
+## 🦆 Agradecimientos y Mención Honorífica
+
+Quiero hacer una mención honorífica y un agradecimiento muy especial a mi maestro, **@elpato001**. Gracias a sus conocimientos transmitidos, su dedicación y sus enseñanzas a lo largo de este camino, la evolución de este proyecto y mis habilidades como desarrollador han llegado a un nuevo y extraordinario nivel. ¡Gracias eternas, maestro!
+
+*Hecho con ❤️ para la comunidad Open Source y Home Servers.*
