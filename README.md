@@ -6,6 +6,18 @@ Combina una interfaz frontend espectacular de tipo escritorio web (frosted glass
 
 ---
 
+## 📸 Capturas de Pantalla (ZenithNAS OS)
+
+Aquí puedes ver la interfaz premium con efecto **Glassmorphic** de ZenithNAS OS en acción:
+
+| **Escritorio Web & Widgets** | **Download Station** |
+|:---:|:---:|
+| ![Escritorio Web & Widgets](images/desktop.png) | ![Download Station](images/download_station.png) |
+| **Detección USB en Caliente** | **Panel de Control (Configuración de Red)** |
+| ![USB Hotplug](images/usb_detect.png) | ![Panel de Control](images/control_panel.png) |
+
+---
+
 ## 🌟 Características Integradas
 1.  **Escritorio Web Completo**: Ventanas arrastrables, redimensionables, colapsables, barra de tareas superior activa, menú de aplicaciones (Launchpad), reloj en tiempo real y centro de notificaciones.
 2.  **Monitor de Recursos (Resource Monitor)**: Gráficos de líneas interactivos en tiempo real creados con Canvas para CPU y RAM, lecturas de temperatura y rendimiento por núcleos.
